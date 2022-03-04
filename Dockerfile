@@ -18,4 +18,5 @@ USER root
 RUN apk del .build-deps
 USER gnuhealth
 WORKDIR /home/gnuhealth
-ENTRYPOINT bash -ic 'sleep 5; source .gnuhealthrc; cdexe && python3 ./trytond-admin --all --database=${TRYTON_DATABASE}' && ./start_gnuhealth.sh
+RUN echo "tmppass" > /tmp/pass
+ENTRYPOINT bash -ic 'sleep 5; export TRYTONPASSFILE=/tmp/pass; source .gnuhealthrc; cdexe && python3 ./trytond-admin --all --database=${TRYTON_DATABASE} --email=admin@example.com' && ./start_gnuhealth.sh
